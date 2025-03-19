@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 
-const ads = [
+let ads = [
   {
     id: 1,
     title: "Bike to sell",
@@ -43,6 +43,24 @@ app.get("/ads", (_req, res) => {
 app.post("/ads", (req, res) => {
   ads.push(req.body);
   res.send("Ad has been created");
+});
+
+app.delete("/ads/:id", (req, res) => {
+  ads = ads.filter((ad) => parseInt(req.params.id) !== ad.id);
+  res.send("Ad has been deleted");
+});
+
+app.put("/ads/:id", (req, res) => {
+  console.log(req.params.id);
+  console.log(req.body);
+  ads = ads.map((ad) => {
+    if (Number.parseInt(req.params.id) === ad.id) {
+      return req.body;
+    } else {
+      return ad;
+    }
+  });
+  res.send("ok");
 });
 
 app.listen(port, () => {
