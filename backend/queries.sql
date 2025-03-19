@@ -4,13 +4,13 @@ CREATE TABLE AD (
     ID INTEGER PRIMARY KEY,
     TITLE TEXT,
     DESCRIPTION TEXT,
-    AUTEUR TEXT,
-    PRIX INTEGER,
-    DATE DATE,
-    IMAGE TEXT,
-    VILLE TEXT);
+    OWNER TEXT,
+    PRICE INTEGER,
+    CREATEDAT DATE,
+    PICTURE TEXT,
+    LOCATION TEXT);
 
-INSERT INTO AD ( TITLE, DESCRIPTION,AUTEUR,PRIX,DATE,IMAGE,VILLE) VALUES
+INSERT INTO AD ( TITLE, DESCRIPTION,OWNER,PRICE,CREATEDAT,PICTURE,LOCATION) VALUES
     ('Vélo à vendre', 'Vélo en bon état, peu servi', 'john.doe@gmail.com', 150, '2024-03-19', NULL, 'Paris'),
     ('Voiture d''occasion', 'Voiture très bien entretenue', 'jane.smith@gmail.com', 5000, '2024-03-18', 'https://example.com/image1.jpg', 'Lyon'),
     ('Stylo plume', 'Stylo plume Parker, encre bleue', 'writer.seller@gmail.com', 15, '2024-09-01', NULL, 'Bordeaux'),
