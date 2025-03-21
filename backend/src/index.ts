@@ -34,6 +34,11 @@ app.delete("/ads/:id", async (req, res) => {
   }
 });
 
+app.put("/ads/:id", async (req, res) => {
+  await Ad.update({ id: Number.parseInt(req.params.id) }, req.body);
+  res.send("Ad has been updated");
+});
+
 /*
 app.get("/ads", (_req, res) => {
   db.all("SELECT * FROM AD", (err, rows) => {

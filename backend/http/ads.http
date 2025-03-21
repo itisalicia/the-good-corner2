@@ -37,3 +37,12 @@ Content-Type: application/json
     "location": "Paris",
     "createdAt": "2023-10-05T10:14:15.922Z"
   }
+
+###
+
+PUT http://localhost:3000/ads/4
+Content-Type: application/json
+
+{
+    "location": "Marseille"
+  }
