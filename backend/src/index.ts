@@ -25,8 +25,13 @@ app.get("/ads", async (_req, res) => {
 });
 
 app.delete("/ads/:id", async (req, res) => {
-  await Ad.delete({ id: Number.parseInt(req.params.id) });
-  res.send("Ad has been removed");
+  try {
+    await Ad.delete({ id: Number.parseInt(req.params.id) });
+    res.send("Ad has been removed");
+  } catch (err) {
+    console.log("err", err);
+    res.status(500).send(err);
+  }
 });
 
 /*
