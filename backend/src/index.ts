@@ -16,8 +16,14 @@ app.post("/ads", async (req, res) => {
   ad.createdAt = req.body.createdAt;
   ad.picture = req.body.picture;
   ad.location = req.body.location;
-  await ad.save();
-  res.status(201).send("ad has been created");
+  ad.category = req.body.category;
+  try {
+    await ad.save();
+    res.status(201).send("ad has been created");
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
 });
 
 app.get("/ads", async (_req, res) => {
@@ -38,6 +44,18 @@ app.delete("/ads/:id", async (req, res) => {
 app.put("/ads/:id", async (req, res) => {
   await Ad.update({ id: Number.parseInt(req.params.id) }, req.body);
   res.send("Ad has been updated");
+});
+
+app.post("/categories", async (req, res) => {
+  const newCategory = new Category();
+  newCategory.title = req.body.title;
+  await newCategory.save();
+  res.status(201).send("Category has been created");
+});
+
+app.get("/categories", async (_req, res) => {
+  const categories = await Category.find();
+  res.send(categories);
 });
 
 app.listen(port, async () => {

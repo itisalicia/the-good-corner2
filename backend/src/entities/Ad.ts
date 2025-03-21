@@ -33,7 +33,10 @@ class Ad extends BaseEntity {
   @Column()
   location: string;
 
-  @ManyToOne(() => Category, (category) => category.ads)
+  @ManyToOne(() => Category, (category) => category.ads, {
+    nullable: false,
+    eager: true,
+  })
   category: Category;
 }
 
