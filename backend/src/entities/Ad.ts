@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import Category from "./Category";
 
 @Entity()
 class Ad extends BaseEntity {
@@ -25,6 +32,9 @@ class Ad extends BaseEntity {
 
   @Column()
   location: string;
+
+  @ManyToOne(() => Category, (category) => category.ads)
+  category: Category;
 }
 
 export default Ad;
