@@ -2,6 +2,7 @@ import express from "express";
 import dataSource from "./config/db";
 import Ad from "./entities/Ad";
 import Category from "./entities/Category";
+import Tag from "./entities/Tag";
 const port = 3000;
 const app = express();
 
@@ -17,6 +18,7 @@ app.post("/ads", async (req, res) => {
   ad.picture = req.body.picture;
   ad.location = req.body.location;
   ad.category = req.body.category;
+  ad.tags = req.body.tags;
   try {
     await ad.save();
     res.status(201).send("ad has been created");
@@ -27,7 +29,7 @@ app.post("/ads", async (req, res) => {
 });
 
 app.get("/ads", async (_req, res) => {
-  const allAds = await Ad.find();
+  const allAds = await Ad.find({ relations: { category: true, tags: true } });
   res.send(allAds);
 });
 
@@ -56,6 +58,13 @@ app.post("/categories", async (req, res) => {
 app.get("/categories", async (_req, res) => {
   const categories = await Category.find();
   res.send(categories);
+});
+
+app.post("/tags", async (req, res) => {
+  const newTag = new Tag();
+  newTag.title = req.body.title;
+  await newTag.save();
+  res.status(201).send("Tag has been created");
 });
 
 app.listen(port, async () => {

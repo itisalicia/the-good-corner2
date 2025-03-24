@@ -2,10 +2,13 @@ import {
   BaseEntity,
   Column,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import Category from "./Category";
+import Tag from "./Tag";
 
 @Entity()
 class Ad extends BaseEntity {
@@ -33,11 +36,12 @@ class Ad extends BaseEntity {
   @Column()
   location: string;
 
-  @ManyToOne(() => Category, (category) => category.ads, {
-    nullable: false,
-    eager: true,
-  })
+  @ManyToOne(() => Category, (category) => category.ads)
   category: Category;
+
+  @ManyToMany(() => Tag)
+  @JoinTable()
+  tags: Tag[];
 }
 
 export default Ad;
