@@ -1,5 +1,4 @@
 const Header = () => {
-  console.log("hello world");
   return (
     <header className="header">
       <div className="main-menu">
