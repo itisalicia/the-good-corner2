@@ -1,3 +1,7 @@
+import { Link } from "react-router";
+
+const categories = [{ id: 1, title: "Ameublement" }];
+
 const Header = () => {
   return (
     <header className="header">
@@ -32,9 +36,9 @@ const Header = () => {
         </a>
       </div>
       <nav className="categories-navigation">
-        <a href="" className="category-navigation-link">
+        <Link to={""} className="category-navigation-link">
           Ameublement
-        </a>{" "}
+        </Link>
         •
         <a href="" className="category-navigation-link">
           Électroménager
