@@ -1,9 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 type Category = {
   id: number;
   title: string;
+};
+
+type Inputs = {
+  title: string;
+  description: string;
+  owner: string;
+  price: number;
+  picture: string;
+  location: string;
+  category: number;
 };
 
 const NewAdForm = () => {
@@ -16,72 +27,92 @@ const NewAdForm = () => {
     };
     fetchCategories();
   }, []);
+
+  const { register, handleSubmit } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    await axios.post("http://localhost:3000/ads", data);
+  };
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        const form = e.target;
-
-        const formData = new FormData(form as HTMLFormElement);
-
-        const formJson = Object.fromEntries(formData.entries());
-        //console.log("formJson", formJson);
-        axios.post("http://localhost:3000/ads", formJson);
-      }}
-    >
+    <form onSubmit={handleSubmit(onSubmit)}>
       <label>
-        Titre de l'annonce
+        Titre
         <input
-          className="text-field"
-          name="title"
           defaultValue={"Je vends ma 206"}
+          {...register("title", { required: true })}
         />
       </label>
+
       <br />
+
       <label>
         Description
         <input
-          className="text-field"
-          name="description"
-          defaultValue={"Ma 206 est une super voiture"}
+          defaultValue={"Ma 206 est super"}
+          {...register("description", { required: true })}
         />
       </label>
+
       <br />
+
       <label>
         Vendeur
-        <input className="text-field" name="owner" defaultValue={"John Doe"} />
-      </label>
-      <br />
-      <label>
-        Price
-        <input className="text-field" name="price" defaultValue={4000} />
-      </label>
-      <br />
-      <label>
-        Picture
         <input
-          className="text-field"
-          name="picture"
+          defaultValue={"John Doe"}
+          {...register("owner", { required: true })}
+        />
+      </label>
+
+      <br />
+
+      <label>
+        Ville
+        <input
+          defaultValue={"Paris"}
+          {...register("location", { required: true })}
+        />
+      </label>
+
+      <br />
+
+      <label>
+        Image
+        <input
           defaultValue={
             "https://www.actuauto.fr/wp-content/uploads/2021/01/Peugeot-206-scaled.jpg"
           }
+          {...register("picture", { required: true })}
         />
       </label>
+
       <br />
+
       <label>
-        Location
-        <input className="text-field" name="location" defaultValue={"Paris"} />
+        Prix
+        <input
+          type="number"
+          defaultValue={4000}
+          {...register("price", { required: true })}
+        />
       </label>
+
       <br />
-      <select name="category">
-        {categories.map((el) => (
-          <option value={el.id} key={el.id}>
-            {el.title}
-          </option>
-        ))}
-      </select>
+
+      <label>
+        Categorie
+        <select {...register("category", { required: true })}>
+          {categories.map((el) => (
+            <option value={el.id} key={el.id}>
+              {el.title}
+            </option>
+          ))}
+        </select>
+      </label>
+
       <br />
-      <button className="button">Submit</button>
+
+      <input type="submit" />
     </form>
   );
 };
