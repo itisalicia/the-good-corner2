@@ -16,7 +16,6 @@ app.post("/ads", async (req, res) => {
   ad.description = req.body.description;
   ad.owner = req.body.owner;
   ad.price = req.body.price;
-  ad.createdAt = req.body.createdAt;
   ad.picture = req.body.picture;
   ad.location = req.body.location;
   ad.category = req.body.category;

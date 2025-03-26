@@ -1,6 +1,7 @@
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
@@ -27,7 +28,7 @@ class Ad extends BaseEntity {
   @Column()
   price: number;
 
-  @Column()
+  @CreateDateColumn()
   createdAt: Date;
 
   @Column()
