@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import dataSource from "./config/db";
 import Ad from "./entities/Ad";
 import Category from "./entities/Category";
@@ -7,6 +8,7 @@ const port = 3000;
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.post("/ads", async (req, res) => {
   const ad = new Ad();
