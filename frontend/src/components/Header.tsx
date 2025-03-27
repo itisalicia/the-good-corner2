@@ -39,7 +39,7 @@ const Header = () => {
             </svg>
           </button>
         </form>
-        <a href="/ad/new" className="button link-button">
+        <a href="/ads/new" className="button link-button">
           <span className="mobile-short-label">Publier</span>
           <span className="desktop-long-label">Publier une annonce</span>
         </a>
@@ -48,7 +48,7 @@ const Header = () => {
         {categories.map((el) => (
           <Link
             key={el.id}
-            to={`?category=${el.id}`}
+            to={`/?category=${el.id}`}
             className="category-navigation-link"
           >
             {el.title}

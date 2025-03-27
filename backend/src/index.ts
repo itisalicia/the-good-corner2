@@ -47,6 +47,13 @@ app.get("/ads", async (req, res) => {
   res.send(allAds);
 });
 
+app.get("/ads/:id", async (req, res) => {
+  const result = await Ad.findOneByOrFail({
+    id: Number.parseInt(req.params.id),
+  });
+  res.send(result);
+});
+
 app.delete("/ads/:id", async (req, res) => {
   try {
     await Ad.delete({ id: Number.parseInt(req.params.id) });
@@ -65,8 +72,13 @@ app.put("/ads/:id", async (req, res) => {
 app.post("/categories", async (req, res) => {
   const newCategory = new Category();
   newCategory.title = req.body.title;
-  await newCategory.save();
-  res.status(201).send("Category has been created");
+  try {
+    await newCategory.save();
+    res.status(201).send("Category has been created");
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
 });
 
 app.get("/categories", async (_req, res) => {

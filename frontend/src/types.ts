@@ -2,3 +2,19 @@ export type Category = {
   id: number;
   title: string;
 };
+
+export type Tag = {
+  id: number;
+};
+
+export type AdDetails = {
+  title: string;
+  description: string;
+  owner: string;
+  price: number;
+  picture: string;
+  location: string;
+  createdAt: string;
+  category: number;
+  tags: Tag[];
+};

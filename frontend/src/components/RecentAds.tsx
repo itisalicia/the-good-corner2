@@ -1,7 +1,7 @@
 import axios from "axios";
 import AdCard, { AdCardProps } from "./AdCard";
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 
 const RecentAds = () => {
   const [ads, setAds] = useState<AdCardProps[]>([]);
@@ -22,13 +22,9 @@ const RecentAds = () => {
       <h2>Annonces récentes</h2>
       <section className="recent-ads">
         {ads.map((el) => (
-          <AdCard
-            key={el.id}
-            picture={el.picture}
-            link={el.link}
-            title={el.title}
-            price={el.price}
-          />
+          <Link key={el.id} to={`/ads/${el.id}`}>
+            <AdCard picture={el.picture} title={el.title} price={el.price} />
+          </Link>
         ))}
       </section>
     </>
