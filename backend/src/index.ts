@@ -4,6 +4,7 @@ import dataSource from "./config/db";
 import Ad from "./entities/Ad";
 import Category from "./entities/Category";
 import Tag from "./entities/Tag";
+import { FindManyOptions } from "typeorm";
 const port = 3000;
 const app = express();
 
@@ -29,8 +30,20 @@ app.post("/ads", async (req, res) => {
   }
 });
 
-app.get("/ads", async (_req, res) => {
-  const allAds = await Ad.find({ relations: { category: true, tags: true } });
+app.get("/ads", async (req, res) => {
+  console.log(req.query);
+  let findOptions: FindManyOptions<Ad> = {
+    relations: { category: true, tags: true },
+  };
+  if (req.query.category !== undefined) {
+    findOptions = {
+      ...findOptions,
+      where: {
+        category: { id: Number.parseInt(req.query.category as string) },
+      },
+    };
+  }
+  const allAds = await Ad.find(findOptions);
   res.send(allAds);
 });
 

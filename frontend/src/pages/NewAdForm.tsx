@@ -1,11 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
-type Category = {
-  id: number;
-  title: string;
-};
+import { Category } from "../types";
 
 type Inputs = {
   title: string;

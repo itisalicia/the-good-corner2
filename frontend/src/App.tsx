@@ -7,7 +7,6 @@ import AdDetailsPage from "./pages/AdDetails";
 import NewAdForm from "./pages/NewAdForm";
 
 function App() {
-  console.log("test");
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
