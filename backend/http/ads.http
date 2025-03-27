@@ -29,18 +29,18 @@ DELETE http://localhost:3000/ads/3
 
 ###
 
-PUT http://localhost:3000/ads/4
+PUT http://localhost:3000/ads/
 Content-Type: application/json
 
 {
-    "title": "This title was edited with PUT",
+    "title": "Appartement",
     "description":
-      "My car is blue, working fine. I'm selling it because I've got a new one",
+      "Lille, 70m2, 2 chambres, 1 salle de bain, 1 cuisine, 1 salon",
     "owner": "car.seller@gmail.com",
     "price": 10000,
     "picture":
-      "https://www.automobile-magazine.fr/asset/cms/34973/config/28294/apres-plusieurs-prototypes-la-bollore-bluecar-a-fini-par-devoiler-sa-version-definitive.jpg",
-    "location": "Paris",
+      "https://www.abrinor.fr/storage/realestates/142558/vente-appartement-lille-main.jpg",
+    "location": "Lille",
     "createdAt": "2023-10-05T10:14:15.922Z"
   }
 
@@ -52,3 +52,7 @@ Content-Type: application/json
 {
     "location": "Marseille"
   }
+
+###
+
+DELETE http://localhost:3000/ads/17
